@@ -1,5 +1,6 @@
 from django.test import TestCase
 from django.contrib.auth import get_user_model
+from core import models
 
 
 def sample_user(email='test@londonappdev.com', password='testpass'):
@@ -42,3 +43,12 @@ class ModelTests(TestCase):
 
         self.assertTrue(user.is_superuser)
         self.assertTrue(user.is_staff)
+
+    def test_message_str(self):
+        """Test creating new message"""
+        message = models.Message.objects.create(
+            user=sample_user(),
+            message="test"
+        )
+
+        self.assertEqual(str(message), "_test")
